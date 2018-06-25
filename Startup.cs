@@ -42,9 +42,7 @@ namespace RPSService
                 app.UseHsts();
             }
 
-            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyMethod());
-
-            app.UseHttpsRedirection();
+            app.UseCors(builder => builder.WithOrigins("*").AllowAnyMethod());
             app.UseMvc();
         }
     }

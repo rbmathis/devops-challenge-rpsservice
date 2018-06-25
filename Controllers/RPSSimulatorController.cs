@@ -9,7 +9,7 @@ namespace RPSService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlayerSimulatorController : ControllerBase
+    public class RpsSimulatorController : ControllerBase
     {
         public enum RockPaperScissors
         {
@@ -18,7 +18,7 @@ namespace RPSService.Controllers
             Scissors
         }
 
-        // GET api/playsimulator
+        // GET api/rpssimulator
         [HttpGet]
         public ActionResult<RockPaperScissors> Get()
         {
@@ -27,7 +27,7 @@ namespace RPSService.Controllers
         }
         
 
-        // GET api/playsimulator/1
+        // GET api/rpssimulator/1
         [HttpGet("{seed}")]
         public ActionResult<RockPaperScissors> Get(int seed)
         {
@@ -35,7 +35,7 @@ namespace RPSService.Controllers
             return (RockPaperScissors)(rnd.Next(3));
         }
 
-        // GET api/playsimulator/0-0
+        // GET api/rpssimulator/0-0
         [HttpGet("{player1}-{player2}")]
         public ActionResult<int> Get(RockPaperScissors player1, RockPaperScissors player2)
         {
