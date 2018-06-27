@@ -55,6 +55,5 @@ namespace RPSService.Controllers
             // What's left means player 2 wins
             return Ok(2);
         }
-
     }
 }
