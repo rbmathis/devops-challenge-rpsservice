@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 using Rps = RPSService.Controllers.RpsSimulatorController.RockPaperScissors;
 
 namespace RpsService.UnitTest.Controllers
@@ -10,10 +12,10 @@ namespace RpsService.UnitTest.Controllers
         public void GetReturnsValidActionResult()
         {
             var simulator = new RPSService.Controllers.RpsSimulatorController();
+            var result = simulator.Get() as OkObjectResult;
 
-            var result = simulator.Get();
-            Assert.IsTrue((result.Value <= Rps.Scissors), "Invalid result from simulator (too hot)");
-            Assert.IsTrue((result.Value >= Rps.Rock), "Invalid result from simulator (too cold)");
+            Assert.IsTrue(((Rps)result.Value <= Rps.Scissors), "Invalid result from simulator (too hot)");
+            Assert.IsTrue(((Rps)result.Value >= Rps.Rock), "Invalid result from simulator (too cold)");
         }
         
         [TestMethod]
@@ -21,13 +23,13 @@ namespace RpsService.UnitTest.Controllers
         {
             var simulator = new RPSService.Controllers.RpsSimulatorController();
 
-            var result = simulator.Get(1);
+            var result = simulator.Get(1) as OkObjectResult;
             Assert.AreEqual(Rps.Rock, result.Value, "Incorrect results based on seed");
 
-            result = simulator.Get(2);
+            result = simulator.Get(2) as OkObjectResult;
             Assert.AreEqual(Rps.Scissors, result.Value, "Incorrect results based on seed");
 
-            result = simulator.Get(5);
+            result = simulator.Get(5) as OkObjectResult;
             Assert.AreEqual(Rps.Paper, result.Value, "Incorrect results based on seed");
         }
 
@@ -36,13 +38,13 @@ namespace RpsService.UnitTest.Controllers
         {
             var simulator = new RPSService.Controllers.RpsSimulatorController();
 
-            var result = simulator.Get(Rps.Rock, Rps.Rock);
+            var result = simulator.Get(Rps.Rock, Rps.Rock) as OkObjectResult;
             Assert.AreEqual(0, result.Value, "Tie wasn't correctly calculated");
 
-            result = simulator.Get(Rps.Scissors, Rps.Scissors);
+            result = simulator.Get(Rps.Scissors, Rps.Scissors) as OkObjectResult;
             Assert.AreEqual(0, result.Value, "Tie wasn't correctly calculated");
 
-            result = simulator.Get(Rps.Paper, Rps.Paper);
+            result = simulator.Get(Rps.Paper, Rps.Paper) as OkObjectResult;
             Assert.AreEqual(0, result.Value, "Tie wasn't correctly calculated");
         }
 
@@ -51,13 +53,13 @@ namespace RpsService.UnitTest.Controllers
         {
             var simulator = new RPSService.Controllers.RpsSimulatorController();
 
-            var result = simulator.Get(Rps.Rock, Rps.Scissors);
+            var result = simulator.Get(Rps.Rock, Rps.Scissors) as OkObjectResult;
             Assert.AreEqual(1, result.Value, "Player 1 was supposed to win");
 
-            result = simulator.Get(Rps.Scissors, Rps.Paper);
+            result = simulator.Get(Rps.Scissors, Rps.Paper) as OkObjectResult;
             Assert.AreEqual(1, result.Value, "Player 1 was supposed to win");
 
-            result = simulator.Get(Rps.Paper, Rps.Rock);
+            result = simulator.Get(Rps.Paper, Rps.Rock) as OkObjectResult;
             Assert.AreEqual(1, result.Value, "Player 1 was supposed to win");
         }
 
@@ -66,13 +68,13 @@ namespace RpsService.UnitTest.Controllers
         {
             var simulator = new RPSService.Controllers.RpsSimulatorController();
 
-            var result = simulator.Get(Rps.Rock, Rps.Paper);
+            var result = simulator.Get(Rps.Rock, Rps.Paper) as OkObjectResult;
             Assert.AreEqual(2, result.Value, "Player 2 was supposed to win");
 
-            result = simulator.Get(Rps.Scissors, Rps.Rock);
+            result = simulator.Get(Rps.Scissors, Rps.Rock) as OkObjectResult;
             Assert.AreEqual(2, result.Value, "Player 2 was supposed to win");
 
-            result = simulator.Get(Rps.Paper, Rps.Scissors);
+            result = simulator.Get(Rps.Paper, Rps.Scissors) as OkObjectResult;
             Assert.AreEqual(2, result.Value, "Player 2 was supposed to win");
         }
     }
