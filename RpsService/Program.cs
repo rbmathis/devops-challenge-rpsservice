@@ -19,6 +19,8 @@ namespace RPSService
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                // Change to file post adding Application Insights Telemetry:
+                .UseApplicationInsights()
                 .UseStartup<Startup>();
     }
 }
